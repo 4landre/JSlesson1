@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>一键跳转导航</title>
+    <link rel="stylesheet" href="https://4landre.github.io/JSlesson1/style.css">
+</head>
+
+<body>
+    <main id="main"></main>
+
+    <script>
+        keys = {
+            0: { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10 },
+            1: { 0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length: 9 },
+            2: { 0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', length: 7 },
+            length: 3
+        }
+        hash = {
+            q: 'qq.com', w: "weibo.com", t: 'taobao.com', j: 'jd.com'
+        }
+        hashINLocalStorage = JSON.parse(localStorage.getItem('save') || 'null')
+        if (hashINLocalStorage) {
+            hash = hashINLocalStorage
+        }
+        index = 0
+        while (index < keys['length']) {
+            mkdiv = document.createElement('div')
+            main.appendChild(mkdiv)
+            row = keys[index]
+            index2 = 0
+            while (index2 < row['length']) {
+                mkkbd = document.createElement('kbd')
+                mkkbd.textContent = row[index2]
+                edit = document.createElement('button')
+                edit.textContent = '编辑'
+                edit.id = row[index2]
+                edit.onclick = function (editThis) {
+                    editItem = editThis['target']['id']
+                    newurl = prompt('输入你想保存的网址')
+                    hash[editItem] = newurl
+                    localStorage.setItem('save',JSON.stringify(hash))
+                }
+                mkdiv.appendChild(mkkbd)
+                mkkbd.appendChild(edit)
+                index2 = index2 + 1
+            }
+            index = index + 1
+        }
+        document.onkeypress = function (userPress) {
+            index3 = userPress['key']
+            website = hash[index3]
+            window.open('http://' + website, '_blank')
+        }
+    </script>
+</body>
+
+</html>

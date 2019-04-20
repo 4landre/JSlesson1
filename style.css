@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#main div {
+    text-align: center;
+}
+
+#main div kbd {
+    border: 1px solid red;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 5px 5px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+button {
+    border: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+kbd:hover button {
+    display: block;
+}
